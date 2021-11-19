@@ -45,4 +45,8 @@ export default {
 	build: {},
 
 	serverMiddleware: ['~/api/index.js'],
+
+	env: {
+		testUrl: 'testURllllll',
+	},
 };
