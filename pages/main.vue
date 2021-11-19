@@ -3,18 +3,14 @@
 </template>
 <script>
 export default {
-	data() {
-		return {
-			test444: 0,
-			test2: 1,
-		};
-	},
 	created() {
 		this.test();
 	},
 	methods: {
 		test() {
 			console.log('test call');
+			console.log(process.env);
+			console.log(process.env.NODE_ENV);
 		},
 	},
 };
