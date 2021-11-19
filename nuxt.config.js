@@ -21,7 +21,7 @@ export default {
 	css: [],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-	plugins: [],
+	plugins: ['@/services/fireinit.js'],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
@@ -47,6 +47,7 @@ export default {
 	serverMiddleware: ['~/api/index.js'],
 
 	env: {
-		firebaseApiKey: process.env.API_KEY || 'testhoho',
+		firebaseApiKey:
+			process.env.HEROKU_FIREBASE_API_KEY || process.env.FIREBASE_API_KEY,
 	},
 };
