@@ -11,6 +11,7 @@ export default {
 			console.log('test call');
 			console.log(process.env);
 			console.log(process.env.NODE_ENV);
+			console.log(process.env.VUE_APP_TEST);
 		},
 	},
 };
