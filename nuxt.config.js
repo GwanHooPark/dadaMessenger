@@ -47,6 +47,6 @@ export default {
 	serverMiddleware: ['~/api/index.js'],
 
 	env: {
-		testUrl: 'testURllllll',
+		firebaseApiKey: process.env.API_KEY || 'testhoho',
 	},
 };
