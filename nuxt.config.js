@@ -21,7 +21,7 @@ export default {
 	css: [],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-	plugins: ['@/services/fireinit.js'],
+	plugins: [],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
@@ -36,8 +36,27 @@ export default {
 	modules: [
 		// https://go.nuxtjs.dev/axios
 		'@nuxtjs/axios',
+		'@nuxtjs/firebase',
 	],
-
+	firebase: {
+		config: {
+			apiKey: 'AIzaSyDpAwAQ3binR3syONe-GA7I9OCwicFil1o',
+			authDomain: 'dada-messenger.firebaseapp.com',
+			projectId: 'dada-messenger',
+			storageBucket: 'dada-messenger.appspot.com',
+			messagingSenderId: '212623593610',
+			appId: '1:212623593610:web:6a17e002d38d0312129d73',
+			measurementId: 'G-D1EF9DBN65',
+		},
+		services: {
+			auth: {
+				initialize: {
+					onAuthStateChangedAction: 'onAuthStateChanged',
+				},
+				ssr: true,
+			},
+		},
+	},
 	// Axios module configuration: https://go.nuxtjs.dev/config-axios
 	axios: {},
 
@@ -49,5 +68,13 @@ export default {
 	env: {
 		firebaseApiKey:
 			process.env.HEROKU_FIREBASE_API_KEY || process.env.FIREBASE_API_KEY,
+	},
+	pwa: {
+		workbox: {
+			importScripts: ['/firebase-auth-sw.js'],
+			// by default the workbox module will not install the service worker in dev environment to avoid conflicts with HMR
+			// only set this true for testing and remember to always clear your browser cache in development
+			dev: process.env.NODE_ENV === 'development',
+		},
 	},
 };
