@@ -13,8 +13,7 @@ export default {
 			console.log(this.$fire.auth);
 			const provider = new this.$fireModule.auth.GoogleAuthProvider();
 			const authData = await this.$fire.auth.signInWithPopup(provider);
-			console.log('autoData');
-			console.log(authData);
+			await this.$store.commit('SET_AUTH_USER', authData);
 			this.$router.push('/profile');
 		},
 	},
