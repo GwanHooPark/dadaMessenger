@@ -14,4 +14,8 @@ export default {
 			photoURL: authUser.photoURL || null,
 		};
 	},
+
+	SET_CURRENT_CHAT_ROOM: (state, room) => {
+		state.currentChatRoom = room;
+	},
 };

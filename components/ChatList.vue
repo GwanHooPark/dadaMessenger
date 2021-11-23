@@ -112,12 +112,30 @@
 		</div>
 		<div class="mt-5">
 			<div class="text-xs text-gray-400 font-semibold uppercase">
-				Team
+				Public Room
 			</div>
 		</div>
 		<div class="mt-2">
 			<div class="flex flex-col -mx-4">
-				<div class="relative flex flex-row items-center p-4">
+				<div
+					v-for="(room, index) in chatRooms"
+					:key="room.id"
+					class="
+						relative
+						flex flex-row
+						items-center
+						p-4
+						cursor-pointer
+					"
+					:class="{
+						'bg-gradient-to-r': index === selectIndex,
+						'from-red-100': index === selectIndex,
+						'border-l-2 ': index === selectIndex,
+						'to-transparent ': index === selectIndex,
+						'border-red-500': index === selectIndex,
+					}"
+					@click="enterChatRoom(room, index)"
+				>
 					<div
 						class="
 							absolute
@@ -138,19 +156,26 @@
 							h-10
 							w-10
 							rounded-full
-							bg-pink-500
 							text-pink-300
 							font-bold
 							flex-shrink-0
 						"
 					>
-						T
+						<img
+							:src="room.createdBy.image"
+							class="
+								rounded-full
+								border border-gray-100
+								shadow-sm
+							"
+						/>
 					</div>
 					<div class="flex flex-col flex-grow ml-3">
-						<div class="text-sm font-medium">Cuberto</div>
+						<div class="text-sm font-medium">
+							{{ room.roomName }}
+						</div>
 						<div class="text-xs truncate w-40">
-							Lorem ipsum dolor sit amet, consectetur adipisicing
-							elit. Debitis, doloribus?
+							{{ room.description }}
 						</div>
 					</div>
 					<div class="flex-shrink-0 ml-2 self-end mb-1">
@@ -167,46 +192,6 @@
 							"
 							>5</span
 						>
-					</div>
-				</div>
-				<div
-					class="
-						flex flex-row
-						items-center
-						p-4
-						bg-gradient-to-r
-						from-red-100
-						to-transparent
-						border-l-2 border-red-500
-					"
-				>
-					<div
-						class="
-							flex
-							items-center
-							justify-center
-							h-10
-							w-10
-							rounded-full
-							bg-pink-500
-							text-pink-300
-							font-bold
-							flex-shrink-0
-						"
-					>
-						T
-					</div>
-					<div class="flex flex-col flex-grow ml-3">
-						<div class="flex items-center">
-							<div class="text-sm font-medium">UI Art Design</div>
-							<div
-								class="h-2 w-2 rounded-full bg-green-500 ml-2"
-							></div>
-						</div>
-						<div class="text-xs truncate w-40">
-							Lorem ipsum dolor sit amet, consectetur adipisicing
-							elit. Debitis, doloribus?
-						</div>
 					</div>
 				</div>
 			</div>
@@ -507,7 +492,16 @@ export default {
 		return {
 			roomName: '',
 			description: '',
+			chatRooms: [],
+			selectIndex: 0,
 		};
+	},
+	created() {
+		// 데이터베이스 리스너 등록
+		this.addChatRoomsListeners();
+	},
+	destroyed() {
+		this.$fire.database.ref('chatRooms').off();
 	},
 	methods: {
 		openModal() {
@@ -515,17 +509,36 @@ export default {
 		},
 		createChatRoom() {
 			// 방을 생성한다.
-			const key = 1;
-			this.$fireModule
-				.database()
-				.ref('chatRoom/' + key)
-				.set({
-					roomName: this.roomName,
-					description: this.description,
-				});
+			const user = this.$store.getters.currentUser;
+			const chatRoomsRef = this.$fire.database.ref('chatRooms');
+			const key = chatRoomsRef.push().key;
+			chatRoomsRef.child(key).set({
+				roomName: this.roomName,
+				description: this.description,
+				createdBy: {
+					name: user.displayName,
+					image: user.photoURL,
+				},
+			});
+			this.closeModal();
+		},
+		closeModal() {
 			this.$modal.hide('chatRoomCreateModal');
 			this.roomName = '';
 			this.description = '';
+		},
+		addChatRoomsListeners() {
+			// 추가된 방 이벤트 수신
+			this.$fire.database
+				.ref('chatRooms')
+				.on('child_added', DataSnapshot => {
+					this.chatRooms.push(DataSnapshot.val());
+					this.enterChatRoom(this.chatRooms[0], 0);
+				});
+		},
+		enterChatRoom(room, index) {
+			this.$store.commit('SET_CURRENT_CHAT_ROOM', room);
+			this.selectIndex = index;
 		},
 	},
 };

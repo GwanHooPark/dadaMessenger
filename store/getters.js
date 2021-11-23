@@ -6,4 +6,7 @@ export default {
 			return false;
 		}
 	},
+	currentUser: state => {
+		return state.authUser;
+	},
 };
