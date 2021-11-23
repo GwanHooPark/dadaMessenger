@@ -21,7 +21,7 @@ export default {
 	css: [],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-	plugins: [{ src: '~/plugins/vue-js-modal', mode: 'client' }],
+	plugins: [{ src: '~/plugins/vue-js-modal.js', mode: 'client' }],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
@@ -43,6 +43,8 @@ export default {
 		config: {
 			apiKey: 'AIzaSyDpAwAQ3binR3syONe-GA7I9OCwicFil1o',
 			authDomain: 'dada-messenger.firebaseapp.com',
+			databaseURL:
+				'https://dada-messenger-default-rtdb.asia-southeast1.firebasedatabase.app',
 			projectId: 'dada-messenger',
 			storageBucket: 'dada-messenger.appspot.com',
 			messagingSenderId: '212623593610',

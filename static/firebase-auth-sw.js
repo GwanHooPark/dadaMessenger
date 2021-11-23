@@ -6,7 +6,7 @@ importScripts(
 importScripts(
   'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth-compat.js'
 )
-firebase.initializeApp({"apiKey":"AIzaSyDpAwAQ3binR3syONe-GA7I9OCwicFil1o","authDomain":"dada-messenger.firebaseapp.com","projectId":"dada-messenger","storageBucket":"dada-messenger.appspot.com","messagingSenderId":"212623593610","appId":"1:212623593610:web:6a17e002d38d0312129d73","measurementId":"G-D1EF9DBN65"})
+firebase.initializeApp({"apiKey":"AIzaSyDpAwAQ3binR3syONe-GA7I9OCwicFil1o","authDomain":"dada-messenger.firebaseapp.com","databaseURL":"https:\u002F\u002Fdada-messenger-default-rtdb.asia-southeast1.firebasedatabase.app","projectId":"dada-messenger","storageBucket":"dada-messenger.appspot.com","messagingSenderId":"212623593610","appId":"1:212623593610:web:6a17e002d38d0312129d73","measurementId":"G-D1EF9DBN65"})
 
 // Initialize authService
 const authService = firebase.auth()

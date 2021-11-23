@@ -90,8 +90,12 @@ export default {
 		async signInWithGoogle() {
 			const provider = new this.$fireModule.auth.GoogleAuthProvider();
 			const authData = await this.$fire.auth.signInWithPopup(provider);
-			await this.$store.commit('SET_AUTH_USER', authData);
 			this.$router.push('/main');
+			setTimeout(async () => {
+				// console.log('authData:' + authData.email);
+				// await this.$store.commit('SET_AUTH_USER', authData);
+				// console.log('authData22:' + authData.email);
+			}, 5000);
 		},
 	},
 };

@@ -422,33 +422,110 @@
 				</button>
 			</div>
 		</div>
+		<modal name="chatRoomCreateModal" :height="260" :width="320">
+			<div class="w-full max-w-xs">
+				<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+					<div class="mb-4">
+						<label
+							class="block text-gray-700 text-sm font-bold mb-2"
+							for="roomName"
+						>
+							방이름
+						</label>
+						<input
+							id="roomName"
+							v-model="roomName"
+							class="
+								shadow
+								appearance-none
+								border
+								rounded
+								w-full
+								py-2
+								px-3
+								text-gray-700
+								leading-tight
+								focus:outline-none focus:shadow-outline
+							"
+							type="text"
+							placeholder="방이름"
+						/>
+					</div>
+					<div class="mb-6">
+						<label
+							class="block text-gray-700 text-sm font-bold mb-2"
+							for="description"
+						>
+							설명
+						</label>
+						<input
+							id="description"
+							v-model="description"
+							class="
+								shadow
+								appearance-none
+								border
+								rounded
+								w-full
+								py-2
+								px-3
+								text-gray-700
+								leading-tight
+								focus:outline-none focus:shadow-outline
+							"
+							type="text"
+							placeholder="설명"
+						/>
+					</div>
+					<div class="flex items-center justify-between">
+						<button
+							class="
+								bg-blue-500
+								hover:bg-blue-700
+								text-white
+								font-bold
+								py-2
+								px-4
+								rounded
+								focus:outline-none focus:shadow-outline
+							"
+							type="button"
+							@click="createChatRoom()"
+						>
+							만들기
+						</button>
+					</div>
+				</form>
+			</div>
+		</modal>
 	</div>
 </template>
 
 <script>
-import Modal from '@/components/Modal.vue';
 export default {
+	data() {
+		return {
+			roomName: '',
+			description: '',
+		};
+	},
 	methods: {
 		openModal() {
-			this.$modal.show(
-				{
-					template: '<span>test</span>',
-					props: ['name'],
-				},
-				{
-					name: 'test',
-				},
-				{
-					width: 300,
-					height: 300,
-				},
-				{
-					'before-close': this.beforeClose,
-				},
-			);
+			this.$modal.show('chatRoomCreateModal');
 		},
-		beforeClose() {
-			console.log('before close');
+		createChatRoom() {
+			// 방을 생성한다.
+			const key = 1;
+			this.$fireModule
+				.database()
+				.ref('chatRoom/' + key)
+				.set({
+					roomName: this.roomName,
+					description: this.description,
+				});
+			this.$modal.hide('chatRoomCreateModal');
+			this.roomName = '';
+			this.description = '';
 		},
 	},
 };
