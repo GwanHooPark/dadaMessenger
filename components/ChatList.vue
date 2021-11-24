@@ -115,8 +115,8 @@
 				Public Room
 			</div>
 		</div>
-		<div class="mt-2">
-			<div class="flex flex-col -mx-4">
+		<div class="mt-2 h-full overflow-hidden">
+			<div class="flex flex-col -mx-4 divide-y h-full overflow-y-auto">
 				<div
 					v-for="(room, index) in chatRooms"
 					:key="room.id"
@@ -407,7 +407,12 @@
 				</button>
 			</div>
 		</div>
-		<modal name="chatRoomCreateModal" :height="260" :width="320">
+		<modal
+			name="chatRoomCreateModal"
+			:height="260"
+			:width="320"
+			@before-close="closeModal"
+		>
 			<div class="w-full max-w-xs">
 				<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
 					<div class="mb-4">
