@@ -24,7 +24,7 @@
 			"
 		>
 			<img
-				:src="authUser.photoURL"
+				:src="authUser ? authUser.photoURL : ''"
 				class="rounded-full border border-gray-100 shadow-sm"
 			/>
 		</a>

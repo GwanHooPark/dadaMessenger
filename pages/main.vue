@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-row h-screen antialiased text-gray-800">
-		<SidePanel />
-		<ChatPanel />
+		<SidePanelMain />
+		<ChatPanelMain />
 	</div>
 </template>
 

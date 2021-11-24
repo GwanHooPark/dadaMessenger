@@ -3,7 +3,8 @@ import initialState from './state';
 export default {
 	RESET_STORE: state => {
 		console.log('RESET_STORE');
-		Object.assign(state, initialState());
+		state.authUser = null;
+		// Object.assign(state, initialState());
 	},
 
 	SET_AUTH_USER: (state, authUser) => {
@@ -17,5 +18,9 @@ export default {
 
 	SET_CURRENT_CHAT_ROOM: (state, room) => {
 		state.currentChatRoom = room;
+	},
+
+	INCREATE_MESSAGES_COMPONENTKEY: state => {
+		state.messagesComponentKey++;
 	},
 };

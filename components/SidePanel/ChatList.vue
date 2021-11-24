@@ -503,7 +503,7 @@ export default {
 	},
 	created() {
 		// 데이터베이스 리스너 등록
-		this.addChatRoomsListeners();
+		this.addChatRoomsListener();
 	},
 	destroyed() {
 		this.$fire.database.ref('chatRooms').off();
@@ -516,8 +516,9 @@ export default {
 			// 방을 생성한다.
 			const user = this.$store.getters.currentUser;
 			const chatRoomsRef = this.$fire.database.ref('chatRooms');
-			const key = chatRoomsRef.push().key;
+			const key = chatRoomsRef.push().key.replace(/-/gi, '');
 			chatRoomsRef.child(key).set({
+				id: key,
 				roomName: this.roomName,
 				description: this.description,
 				createdBy: {
@@ -532,18 +533,19 @@ export default {
 			this.roomName = '';
 			this.description = '';
 		},
-		addChatRoomsListeners() {
+		addChatRoomsListener() {
 			// 추가된 방 이벤트 수신
-			this.$fire.database
-				.ref('chatRooms')
-				.on('child_added', DataSnapshot => {
-					this.chatRooms.push(DataSnapshot.val());
-					this.enterChatRoom(this.chatRooms[0], 0);
-				});
+			this.$fire.database.ref('chatRooms').on('child_added', snapshot => {
+				console.log(snapshot.val());
+				this.chatRooms.push(snapshot.val());
+				this.enterChatRoom(this.chatRooms[0], 0);
+			});
 		},
 		enterChatRoom(room, index) {
 			this.$store.commit('SET_CURRENT_CHAT_ROOM', room);
 			this.selectIndex = index;
+			// messages 컴포넌트를 갱신하기 위해 호출
+			this.$store.commit('INCREATE_MESSAGES_COMPONENTKEY');
 		},
 	},
 };
