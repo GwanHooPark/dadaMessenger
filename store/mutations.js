@@ -27,4 +27,17 @@ export default {
 	INCREATE_MESSAGES_COMPONENTKEY: state => {
 		state.messagesComponentKey++;
 	},
+
+	ADD_TYPING_INFO: (state, typingInfo) => {
+		state.typingInfo.push({
+			id: typingInfo.id,
+			name: typingInfo.name,
+		});
+	},
+	REMOVE_TYPING_INFO: (state, typingInfoKey) => {
+		const idx = state.typingInfo.findIndex(info => {
+			return info.id === typingInfoKey;
+		});
+		state.typingInfo.splice(idx, 1);
+	},
 };

@@ -15,4 +15,7 @@ export default {
 	messagesComponentKey: state => {
 		return state.messagesComponentKey;
 	},
+	typingInfo: state => {
+		return state.typingInfo;
+	},
 };

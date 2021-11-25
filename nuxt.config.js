@@ -39,6 +39,9 @@ export default {
 		'@nuxtjs/axios',
 		'@nuxtjs/firebase',
 	],
+	router: {
+		middleware: 'auth',
+	},
 	firebase: {
 		config: {
 			apiKey: 'AIzaSyDpAwAQ3binR3syONe-GA7I9OCwicFil1o',

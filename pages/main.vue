@@ -6,11 +6,7 @@
 </template>
 
 <script>
-export default {
-	created() {
-		console.log('main.vue');
-	},
-};
+export default {};
 </script>
 
 <style></style>
