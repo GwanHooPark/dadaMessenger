@@ -7,7 +7,9 @@
 
 <script>
 export default {
-	middleware: 'auth',
+	created() {
+		console.log('main.vue');
+	},
 };
 </script>
 

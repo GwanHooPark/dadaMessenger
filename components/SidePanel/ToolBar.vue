@@ -199,10 +199,16 @@ export default {
 		...mapState(['authUser']),
 	},
 	methods: {
-		async logout() {
+		logout() {
 			console.log('call logout');
-			await this.$fire.auth.signOut();
-			this.$router.push('/');
+			this.$fire.auth
+				.signOut()
+				.then(() => {
+					this.$router.push('/');
+				})
+				.catch(err => {
+					console.log(err);
+				});
 		},
 	},
 };

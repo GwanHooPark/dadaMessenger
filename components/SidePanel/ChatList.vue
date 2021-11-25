@@ -538,7 +538,7 @@ export default {
 			this.$fire.database.ref('chatRooms').on('child_added', snapshot => {
 				console.log(snapshot.val());
 				this.chatRooms.push(snapshot.val());
-				this.enterChatRoom(this.chatRooms[0], 0);
+				// this.enterChatRoom(this.chatRooms[0], 0);
 			});
 		},
 		enterChatRoom(room, index) {

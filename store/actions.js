@@ -41,10 +41,13 @@ export default {
 
 	async onAuthStateChanged({ commit }, { authUser, claims }) {
 		console.log('actions.js onauthStageChanged');
+		console.log(authUser);
 		if (!authUser) {
 			commit('RESET_STORE');
-			return;
+			this.$router.push('/');
+		} else {
+			await commit('SET_AUTH_USER', authUser);
+			this.$router.push('/main');
 		}
-		await commit('SET_AUTH_USER', authUser);
 	},
 };

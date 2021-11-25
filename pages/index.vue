@@ -72,8 +72,40 @@
 											alt="..."
 											class="w-5 mr-1"
 											src="../assets/img/google.svg"
-										/>Google 로 계속하기
+										/>Google
 									</button>
+									<button
+										class="
+											bg-white
+											active:bg-gray-100
+											text-gray-800
+											font-normal
+											px-4
+											py-2
+											rounded
+											outline-none
+											focus:outline-none
+											mr-1
+											mb-1
+											uppercase
+											shadow
+											hover:shadow-md
+											inline-flex
+											items-center
+											font-bold
+											text-xs
+										"
+										type="button"
+										style="transition: all 0.15s ease 0s"
+										@click="signInWithGitHub()"
+									>
+										<img
+											alt="..."
+											class="w-5 mr-1"
+											src="../assets/img/github.svg"
+										/>GitHub
+									</button>
+									<button @click="reset()">reset</button>
 								</div>
 							</div>
 						</div>
@@ -86,16 +118,43 @@
 
 <script>
 export default {
+	created() {
+		console.log('index created');
+		if (this.$store.getters.isLoggedIn) {
+			this.$router.push('/main');
+		}
+	},
 	methods: {
 		async signInWithGoogle() {
 			const provider = new this.$fireModule.auth.GoogleAuthProvider();
-			const authData = await this.$fire.auth.signInWithPopup(provider);
-			this.$router.push('/main');
-			setTimeout(async () => {
-				// console.log('authData:' + authData.email);
-				// await this.$store.commit('SET_AUTH_USER', authData);
-				// console.log('authData22:' + authData.email);
-			}, 5000);
+			const authData = await this.$fire.auth
+				.signInWithPopup(provider)
+				.then(result => {
+					console.log('result');
+					this.$router.push('/main');
+					console.log('result2');
+				});
+
+			// setTimeout(async () => {
+			// 	// console.log('authData:' + authData.email);
+			// 	// await this.$store.commit('SET_AUTH_USER', authData);
+			// 	// console.log('authData22:' + authData.email);
+			// }, 5000);
+		},
+		async signInWithGitHub() {
+			const provider = new this.$fireModule.auth.GithubAuthProvider();
+			const authData = await this.$fire.auth
+				.signInWithPopup(provider)
+				.then(result => {
+					console.log('result');
+					const user = result.user;
+					console.log(user);
+					this.$router.push('/main');
+				});
+		},
+		reset() {
+			console.log('reest');
+			this.$store.commit('RESET_STORE');
 		},
 	},
 };

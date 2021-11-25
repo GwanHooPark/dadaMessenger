@@ -15,7 +15,9 @@
 			T
 		</div>
 		<div class="flex flex-col ml-3">
-			<div class="font-semibold text-sm">UI Art Design</div>
+			<div class="font-semibold text-sm">
+				{{ currentChatRoom.roomName }}
+			</div>
 			<div class="text-xs text-gray-500">Active</div>
 		</div>
 		<div class="ml-auto">
@@ -125,7 +127,12 @@
 </template>
 
 <script>
-export default {};
+import { mapState, mapGetters } from 'vuex';
+export default {
+	computed: {
+		...mapState(['currentChatRoom']),
+	},
+};
 </script>
 
 <style></style>
