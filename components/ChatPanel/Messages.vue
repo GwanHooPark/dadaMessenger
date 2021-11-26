@@ -1,6 +1,7 @@
 <template>
 	<div class="h-full overflow-hidden py-4">
 		<div
+			v-show="isDrawMessage"
 			id="myInfiniteScroll"
 			class="
 				h-full
@@ -32,6 +33,7 @@ export default {
 	data() {
 		return {
 			messages: [],
+			isDrawMessage: false,
 		};
 	},
 	computed: {
@@ -44,6 +46,7 @@ export default {
 		},
 	},
 	mounted() {
+		console.log('mounted messages');
 		const currentChatRoom = this.$store.getters.currentChatRoom;
 		if (Object.keys(currentChatRoom).length !== 0) {
 			this.addMessagesListener(currentChatRoom.id);
@@ -61,7 +64,6 @@ export default {
 				.ref('messages')
 				.child(chatRoomId)
 				.on('child_added', snapshot => {
-					console.log(snapshot.val());
 					this.messages.push(snapshot.val());
 					this.scrollMoveBottom();
 				});
@@ -95,6 +97,7 @@ export default {
 			setTimeout(() => {
 				document.querySelector('#myInfiniteScroll').scrollTop =
 					document.querySelector('#myInfiniteScroll').scrollHeight;
+				this.isDrawMessage = true;
 			}, 300);
 		},
 	},
