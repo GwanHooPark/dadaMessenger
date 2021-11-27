@@ -1,5 +1,8 @@
 <template>
-	<div class="flex flex-row items-center">
+	<div
+		v-if="Object.keys(currentChatRoom).length > 0"
+		class="flex flex-row items-center"
+	>
 		<div
 			class="
 				flex flex-row
@@ -235,7 +238,7 @@ export default {
 		};
 	},
 	computed: {
-		...mapState(['authUser']),
+		...mapState(['authUser', 'currentChatRoom']),
 	},
 	methods: {
 		sendMessage() {

@@ -52,9 +52,7 @@ export default {
 	},
 	computed: {
 		isMyMessage() {
-			console.log('isMyMessage');
 			const user = this.$store.getters.currentUser;
-			console.log(user);
 			return user.uid === this.message.user.id;
 		},
 	},

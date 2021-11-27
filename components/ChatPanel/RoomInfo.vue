@@ -127,7 +127,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 export default {
 	computed: {
 		...mapState(['currentChatRoom']),

@@ -42,22 +42,31 @@ export default {
 		},
 		typingInfoNames() {
 			const infos = this.$store.getters.typingInfo;
-			return infos.map(o => o.name).join(',');
+			return [...new Set(infos.map(o => o.name))].join(',');
 		},
 	},
+	created() {
+		this.removeListener();
+	},
 	mounted() {
-		console.log('mounted messages');
 		const currentChatRoom = this.$store.getters.currentChatRoom;
 		if (Object.keys(currentChatRoom).length !== 0) {
+			console.log('mount event');
 			this.addMessagesListener(currentChatRoom.id);
 			this.addTypingListener();
 			this.removeTypingListener();
 		}
 	},
 	destroyed() {
-		this.$fire.database.ref('messages').off();
+		this.removeListener();
 	},
 	methods: {
+		removeListener() {
+			console.log('remove event');
+			this.$fire.database.ref('messages').off('child_added');
+			this.$fire.database.ref('typing').off('child_added');
+			this.$fire.database.ref('typing').off('child_removed');
+		},
 		addMessagesListener(chatRoomId) {
 			// 메시지 추가 이벤트 리스너
 			this.$fire.database
@@ -75,7 +84,13 @@ export default {
 				.ref('typing')
 				.child(currentChatRoom.id)
 				.on('child_added', snapshot => {
-					if (snapshot.key !== user.uid) {
+					console.log(snapshot);
+					const ref = snapshot.ref.parent.key;
+					console.log(`${ref} :: ${currentChatRoom.id}`);
+					if (
+						ref === currentChatRoom.id &&
+						snapshot.key !== user.uid
+					) {
 						this.$store.commit('ADD_TYPING_INFO', {
 							id: snapshot.key,
 							name: snapshot.val(),
