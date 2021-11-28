@@ -3,7 +3,7 @@
 		<div class="flex flex-row items-center">
 			<div class="flex flex-row items-center">
 				<div class="text-xl font-semibold">Messages</div>
-				<div
+				<!-- <div
 					class="
 						flex
 						items-center
@@ -19,7 +19,7 @@
 					"
 				>
 					5
-				</div>
+				</div> -->
 			</div>
 			<div class="ml-auto">
 				<button
@@ -165,7 +165,7 @@
 					}"
 					@click="enterChatRoom(room, index)"
 				>
-					<div
+					<!-- <div
 						class="
 							absolute
 							text-xs text-gray-500
@@ -176,7 +176,7 @@
 						"
 					>
 						5 min
-					</div>
+					</div> -->
 					<div
 						class="
 							flex
@@ -207,7 +207,7 @@
 							{{ room.description }}
 						</div>
 					</div>
-					<div class="flex-shrink-0 ml-2 self-end mb-1">
+					<!-- <div class="flex-shrink-0 ml-2 self-end mb-1">
 						<span
 							class="
 								flex
@@ -221,7 +221,7 @@
 							"
 							>5</span
 						>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
