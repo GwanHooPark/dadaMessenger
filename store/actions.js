@@ -1,6 +1,5 @@
 export default {
 	async nuxtServerInit({ dispatch }, ctx) {
-		console.log('nuxtserverinit');
 		if (this.$fire.auth === null) {
 			console.log(
 				'nuxtServerInit Example not working - this.$fire.auth cannot be accessed.',
@@ -40,8 +39,6 @@ export default {
 	},
 
 	async onAuthStateChanged({ commit }, { authUser, claims }) {
-		console.log('actions.js onauthStageChanged');
-		console.log(authUser);
 		if (!authUser) {
 			commit('RESET_STORE');
 			this.$router.push('/');

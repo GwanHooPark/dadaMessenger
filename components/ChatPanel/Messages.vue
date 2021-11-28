@@ -51,7 +51,6 @@ export default {
 	mounted() {
 		const currentChatRoom = this.$store.getters.currentChatRoom;
 		if (Object.keys(currentChatRoom).length !== 0) {
-			console.log('mount event');
 			this.addMessagesListener(currentChatRoom.id);
 			this.addTypingListener();
 			this.removeTypingListener();
@@ -62,7 +61,6 @@ export default {
 	},
 	methods: {
 		removeListener() {
-			console.log('remove event');
 			this.$fire.database.ref('messages').off('child_added');
 			this.$fire.database.ref('typing').off('child_added');
 			this.$fire.database.ref('typing').off('child_removed');
@@ -84,9 +82,7 @@ export default {
 				.ref('typing')
 				.child(currentChatRoom.id)
 				.on('child_added', snapshot => {
-					console.log(snapshot);
 					const ref = snapshot.ref.parent.key;
-					console.log(`${ref} :: ${currentChatRoom.id}`);
 					if (
 						ref === currentChatRoom.id &&
 						snapshot.key !== user.uid

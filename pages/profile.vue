@@ -11,8 +11,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import { mapState, mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 export default {
 	middleware: 'auth',
 	computed: {
@@ -20,7 +19,6 @@ export default {
 	},
 	methods: {
 		async logout() {
-			console.log('call logout');
 			await this.$fire.auth.signOut();
 			this.$router.push('/');
 		},

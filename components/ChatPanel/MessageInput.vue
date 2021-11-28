@@ -272,14 +272,12 @@ export default {
 			this.message = '';
 		},
 		openEmoticonList() {
-			console.log('open Emoticon list');
 			this.$modal.show('emoticonLayer');
 		},
 		typingMessage() {
 			const typingRef = this.$fire.database.ref('typing');
 			const currentChatRoom = this.$store.getters.currentChatRoom;
 			const user = this.$store.getters.currentUser;
-			console.log('typing message');
 			if (this.message) {
 				typingRef
 					.child(currentChatRoom.id)

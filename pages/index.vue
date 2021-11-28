@@ -119,7 +119,6 @@
 <script>
 export default {
 	created() {
-		console.log('index created');
 		if (this.$store.getters.isLoggedIn) {
 			this.$router.push('/main');
 		}
@@ -130,30 +129,19 @@ export default {
 			const authData = await this.$fire.auth
 				.signInWithPopup(provider)
 				.then(result => {
-					console.log('result');
 					this.$router.push('/main');
-					console.log('result2');
 				});
-
-			// setTimeout(async () => {
-			// 	// console.log('authData:' + authData.email);
-			// 	// await this.$store.commit('SET_AUTH_USER', authData);
-			// 	// console.log('authData22:' + authData.email);
-			// }, 5000);
 		},
 		async signInWithGitHub() {
 			const provider = new this.$fireModule.auth.GithubAuthProvider();
 			const authData = await this.$fire.auth
 				.signInWithPopup(provider)
 				.then(result => {
-					console.log('result');
 					const user = result.user;
-					console.log(user);
 					this.$router.push('/main');
 				});
 		},
 		reset() {
-			console.log('reest');
 			this.$store.commit('RESET_STORE');
 		},
 	},

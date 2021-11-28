@@ -103,7 +103,6 @@
 											src="../assets/img/github.svg"
 										/>GitHub
 									</button>
-									<button @click="reset()">reset</button>
 								</div>
 							</div>
 						</div>
@@ -127,9 +126,7 @@ export default {
 			const authData = await this.$fire.auth
 				.signInWithPopup(provider)
 				.then(result => {
-					console.log('result');
 					this.$router.push('/main');
-					console.log('result2');
 				});
 		},
 		async signInWithGitHub() {
@@ -137,14 +134,11 @@ export default {
 			const authData = await this.$fire.auth
 				.signInWithPopup(provider)
 				.then(result => {
-					console.log('result');
 					const user = result.user;
-					console.log(user);
 					this.$router.push('/main');
 				});
 		},
 		reset() {
-			console.log('reest');
 			this.$store.commit('RESET_STORE');
 		},
 	},

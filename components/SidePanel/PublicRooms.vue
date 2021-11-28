@@ -369,7 +369,6 @@ export default {
 			}
 		},
 		testLoading() {
-			console.log('test loading');
 			this.$nuxt.$loading.start();
 		},
 		openModal() {
@@ -402,7 +401,6 @@ export default {
 		addChatRoomsListener() {
 			// 추가된 방 이벤트 수신
 			this.$fire.database.ref('chatRooms').on('child_added', snapshot => {
-				console.log(snapshot.val());
 				this.chatRooms.push(snapshot.val());
 				// this.enterChatRoom(this.chatRooms[0], 0);
 			});

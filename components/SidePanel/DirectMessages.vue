@@ -344,9 +344,7 @@
 
 <script>
 export default {
-	mounted() {
-		console.log('DirectMessages mounted');
-	},
+	mounted() {},
 };
 </script>
 

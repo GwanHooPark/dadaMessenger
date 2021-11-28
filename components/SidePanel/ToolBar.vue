@@ -200,7 +200,6 @@ export default {
 	},
 	methods: {
 		logout() {
-			console.log('call logout');
 			this.$fire.auth
 				.signOut()
 				.then(() => {
