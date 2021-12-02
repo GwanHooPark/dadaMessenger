@@ -44,15 +44,30 @@ export default {
 	},
 	firebase: {
 		config: {
-			apiKey: 'AIzaSyDpAwAQ3binR3syONe-GA7I9OCwicFil1o',
-			authDomain: 'dada-messenger.firebaseapp.com',
+			apiKey:
+				process.env.HEROKU_FIREBASE_API_KEY ||
+				process.env.FIREBASE_API_KEY,
+			authDomain:
+				process.env.HEROKU_FIREBASE_AUTH_DOMAIN ||
+				process.env.FIREBASE_AUTH_DOMAIN,
 			databaseURL:
-				'https://dada-messenger-default-rtdb.asia-southeast1.firebasedatabase.app',
-			projectId: 'dada-messenger',
-			storageBucket: 'dada-messenger.appspot.com',
-			messagingSenderId: '212623593610',
-			appId: '1:212623593610:web:6a17e002d38d0312129d73',
-			measurementId: 'G-D1EF9DBN65',
+				process.env.HEROKU_FIREBASE_DATABASE_URL ||
+				process.env.FIREBASE_DATABASE_URL,
+			projectId:
+				process.env.HEROKU_FIREBASE_PROJECT_ID ||
+				process.env.FIREBASE_PROJECT_ID,
+			storageBucket:
+				process.env.HEROKU_FIREBASE_STORAGE_BUCKET ||
+				process.env.FIREBASE_STORAGE_BUCKET,
+			messagingSenderId:
+				process.env.HEROKU_FIREBASE_MESSAGING_SENDER_ID ||
+				process.env.FIREBASE_MESSAGING_SENDER_ID,
+			appId:
+				process.env.HEROKU_FIREBASE_APP_ID ||
+				process.env.FIREBASE_APP_ID,
+			measurementId:
+				process.env.HEROKU_FIREBASE_MEASUREMENT_ID ||
+				process.env.FIREBASE_MEASUREMENT_ID,
 		},
 		services: {
 			auth: {

@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-row h-screen antialiased text-gray-800">
+	<div class="flex flex-row h-screen antialiased text-gray-800 top_border">
 		<SidePanelMain />
 		<ChatPanelMain />
 	</div>
@@ -9,4 +9,8 @@
 export default {};
 </script>
 
-<style></style>
+<style scoped>
+.top_border {
+	border-top: 1px solid #bfbde7;
+}
+</style>
